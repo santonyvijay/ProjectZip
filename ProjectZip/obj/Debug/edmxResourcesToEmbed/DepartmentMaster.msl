@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectZDepartmentModelStoreContainer" CdmEntityContainer="ProjectZDepartmentEntities">
+    <EntitySetMapping Name="College_Master">
+      <EntityTypeMapping TypeName="ProjectZDepartmentModel.College_Master">
+        <MappingFragment StoreEntitySet="College_Master">
+          <ScalarProperty Name="College_Code" ColumnName="College_Code" />
+          <ScalarProperty Name="College_Name" ColumnName="College_Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department_Master">
+      <EntityTypeMapping TypeName="ProjectZDepartmentModel.Department_Master">
+        <MappingFragment StoreEntitySet="Department_Master">
+          <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
+          <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+          <ScalarProperty Name="College_Code" ColumnName="College_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

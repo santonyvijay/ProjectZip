@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="College_Master">
+          <Key>
+            <PropertyRef Name="College_Code" />
+          </Key>
+          <Property Name="College_Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="College_Name" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="20" />
+          <Property Name="Country" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Course_Catalog_Master">
+          <Key>
+            <PropertyRef Name="Subject_Code" />
+            <PropertyRef Name="Course_No" />
+          </Key>
+          <Property Name="Subject_Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Subject_Desc" Type="varchar" MaxLength="100" />
+          <Property Name="Course_No" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Course_Desc" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Course_Detail">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Course_No" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Subject_Code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Lecture" Type="int" />
+          <Property Name="Course_Type" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+          <Property Name="Contact_Hours" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Lab" Type="int" />
+        </EntityType>
+        <EntityType Name="Department_Master">
+          <Key>
+            <PropertyRef Name="Dept_ID" />
+          </Key>
+          <Property Name="Dept_ID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Dept_Name" Type="varchar" MaxLength="50" />
+          <Property Name="College_Code" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Course_Detail_Course_Detail">
+          <End Role="Course_Detail" Type="Self.Course_Detail" Multiplicity="1" />
+          <End Role="Course_Detail1" Type="Self.Course_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Course_Detail">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Course_Detail1">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectZModelStoreContainer">
+          <EntitySet Name="College_Master" EntityType="Self.College_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course_Catalog_Master" EntityType="Self.Course_Catalog_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course_Detail" EntityType="Self.Course_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department_Master" EntityType="Self.Department_Master" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Detail_Course_Detail" Association="Self.FK_Course_Detail_Course_Detail">
+            <End Role="Course_Detail" EntitySet="Course_Detail" />
+            <End Role="Course_Detail1" EntitySet="Course_Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="College_Master">
+          <Key>
+            <PropertyRef Name="College_Code" />
+          </Key>
+          <Property Name="College_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="College_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Course_Catalog_Master">
+          <Key>
+            <PropertyRef Name="Subject_Code" />
+            <PropertyRef Name="Course_No" />
+          </Key>
+          <Property Name="Subject_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject_Desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Course_No" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Course_Desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Course_Detail">
+          <Key>
+            <PropertyRef Name="Course_ID" />
+          </Key>
+          <Property Name="Course_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Course_No" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Subject_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lecture" Type="Int32" />
+          <Property Name="Course_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Contact_Hours" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Lab" Type="Int32" />
+          <NavigationProperty Name="Course_Detail1" Relationship="Self.FK_Course_Detail_Course_Detail" FromRole="Course_Detail" ToRole="Course_Detail1" />
+          <NavigationProperty Name="Course_Detail2" Relationship="Self.FK_Course_Detail_Course_Detail" FromRole="Course_Detail1" ToRole="Course_Detail" />
+        </EntityType>
+        <EntityType Name="Department_Master">
+          <Key>
+            <PropertyRef Name="Dept_ID" />
+          </Key>
+          <Property Name="Dept_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dept_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="College_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Course_Detail_Course_Detail">
+          <End Role="Course_Detail" Type="Self.Course_Detail" Multiplicity="1" />
+          <End Role="Course_Detail1" Type="Self.Course_Detail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Course_Detail">
+              <PropertyRef Name="Course_ID" />
+            </Principal>
+            <Dependent Role="Course_Detail1">
+              <PropertyRef Name="Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectZEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="College_Master" EntityType="Self.College_Master" />
+          <EntitySet Name="Course_Catalog_Master" EntityType="Self.Course_Catalog_Master" />
+          <EntitySet Name="Course_Detail" EntityType="Self.Course_Detail" />
+          <EntitySet Name="Department_Master" EntityType="Self.Department_Master" />
+          <AssociationSet Name="FK_Course_Detail_Course_Detail" Association="Self.FK_Course_Detail_Course_Detail">
+            <End Role="Course_Detail" EntitySet="Course_Detail" />
+            <End Role="Course_Detail1" EntitySet="Course_Detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectZModelStoreContainer" CdmEntityContainer="ProjectZEntities">
+          <EntitySetMapping Name="College_Master">
+            <EntityTypeMapping TypeName="ProjectZModel.College_Master">
+              <MappingFragment StoreEntitySet="College_Master">
+                <ScalarProperty Name="College_Code" ColumnName="College_Code" />
+                <ScalarProperty Name="College_Name" ColumnName="College_Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Course_Catalog_Master">
+            <EntityTypeMapping TypeName="ProjectZModel.Course_Catalog_Master">
+              <MappingFragment StoreEntitySet="Course_Catalog_Master">
+                <ScalarProperty Name="Subject_Code" ColumnName="Subject_Code" />
+                <ScalarProperty Name="Subject_Desc" ColumnName="Subject_Desc" />
+                <ScalarProperty Name="Course_No" ColumnName="Course_No" />
+                <ScalarProperty Name="Course_Desc" ColumnName="Course_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Course_Detail">
+            <EntityTypeMapping TypeName="ProjectZModel.Course_Detail">
+              <MappingFragment StoreEntitySet="Course_Detail">
+                <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+                <ScalarProperty Name="Course_No" ColumnName="Course_No" />
+                <ScalarProperty Name="Subject_Code" ColumnName="Subject_Code" />
+                <ScalarProperty Name="Lecture" ColumnName="Lecture" />
+                <ScalarProperty Name="Course_Type" ColumnName="Course_Type" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Lab" ColumnName="Lab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department_Master">
+            <EntityTypeMapping TypeName="ProjectZModel.Department_Master">
+              <MappingFragment StoreEntitySet="Department_Master">
+                <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
+                <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+                <ScalarProperty Name="College_Code" ColumnName="College_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectZDepartmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="College_Master">
+    <Key>
+      <PropertyRef Name="College_Code" />
+    </Key>
+    <Property Name="College_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="College_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Department_Master" Relationship="Self.FK_Department_Master_College_Master" FromRole="College_Master" ToRole="Department_Master" />
+  </EntityType>
+  <EntityType Name="Department_Master">
+    <Key>
+      <PropertyRef Name="Dept_ID" />
+    </Key>
+    <Property Name="Dept_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dept_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="College_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="College_Master" Relationship="Self.FK_Department_Master_College_Master" FromRole="Department_Master" ToRole="College_Master" />
+  </EntityType>
+  <Association Name="FK_Department_Master_College_Master">
+    <End Role="College_Master" Type="Self.College_Master" Multiplicity="1" />
+    <End Role="Department_Master" Type="Self.Department_Master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="College_Master">
+        <PropertyRef Name="College_Code" />
+      </Principal>
+      <Dependent Role="Department_Master">
+        <PropertyRef Name="College_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectZDepartmentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="College_Master" EntityType="Self.College_Master" />
+    <EntitySet Name="Department_Master" EntityType="Self.Department_Master" />
+    <AssociationSet Name="FK_Department_Master_College_Master" Association="Self.FK_Department_Master_College_Master">
+      <End Role="College_Master" EntitySet="College_Master" />
+      <End Role="Department_Master" EntitySet="Department_Master" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
